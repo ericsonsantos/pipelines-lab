@@ -1,47 +1,36 @@
-name: "Estrutura de diretorios e arquivos"
+name: Hello github Actions
 
 on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main]
+    branches: [ main ]
   workflow_dispatch:
 
-env:
-  NODE_VERSION: '18'
 
 jobs:
-  demonstrando-estrutura:
-    name: "Demonstrando Estrutura Básica"
+  hello-gob:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout do Código"
+      - name: Checkout Código
         uses: actions/checkout@v4
 
-      - name: "Mostrar estrutura .github/workflows"
-        run: |
-          echo " == ESTRUTURA DE DIRETORIOS E ARQUIVOS .github/workflows =="
-          ls -la .github/workflows
-          echo ""
-          echo " total de workflows: $(ls -l .github/workflows | wc -l) "
+      - name: Executar Hello world
+        run: echo "Hello Github Actions"
 
-      - name: Elementos obrigatorios do workflow
+      - name: Exibir informações do sistema
         run: |
-          echo " == ELEMENTOS OBRIGATORIOS DO WORKFLOW =="
-          echo " 1. name: Nome do workflow"
-          echo " 2. on: Evento que dispara o workflow"
-          echo " 3. jobs: Definição dos trabalhos a serem executados"
-          echo " 4. runs-on: Ambiente de execução do trabalho"
-          echo " 5. steps: Passos a serem executados dentro do trabalho"
-          echo ""
-          echo " Total de elementos obrigatórios: 5"
+          echo "Sistema operacional: ${{ runner.os }}"
+          echo "Diretorio atual: $(pwd)"
+          echo "Data atual: $(date)"
+          echo "Usuario atual: $(whoami)"
 
-      - name: Váriaveis e Contexto do Workflow
+      - name: Listar arquivos do repositorio
+        run: ls -la
+
+      - name: Comandos multiplos
         run: |
-          echo " == VARIAVEIS E CONTEXTO DO WORKFLOW =="
-          echo " Variáveis env: ${{ env.NODE_VERSION }}"
-          echo " 1. env: Variáveis de ambiente"
-          echo " 2. context: Contexto do workflow"
-          echo ""
-          echo " Total de elementos opcionais: 2"
+          echo "Este é o lab 01 do curso de Github Actions"
+          echo "Workflows executado com sucesso"
+          echo "Pronto para os proximos desafios"
