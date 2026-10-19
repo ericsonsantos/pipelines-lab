@@ -1,40 +1,28 @@
-name : "Estrutura de diretorio e Arquivos"
-
 on:
-  push:
-    branches: [ main]
+  schedule:
+    # Exucuta as 21:51 hora de Brasília (UTC)
+    - cron: '55 21 * * *' # Runs every day at midnight
   workflow_dispatch:
 
-env:
-  NODE_VERSION: '18'
-
 jobs:
-  demonstrat-estrutura:
-    name: "Demonstrar Estrutura Básica"
+  echeduled-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout do Codigo"
+      - name: Checkout codigo
         uses: actions/checkout@v4
 
-      - name: "Monstrar estrutura .github/workflows"
+      - name: Informalçoes da Schedule
         run: |
-          echo "=== ESTRUTURA DO SIRETORIO .github/workflows ==="
-          ls -la .github/workflows/
-          echo ""
-          echo "Total de workflows: $(ls -1 .github/workflows/*.y*ml 2>/dev/null | wc -l)"
+          echo "workflow disprado por schedele
+          echo "Data e hora: $(date)"
+          echo "hora utc: $(date -u)"
+          echo "timezone: $(date +%Z)"
 
-      - name: Elementos obrigatorios do workflow
+      - name: Relatorio diario automatico
         run: |
-          echo "=== ELEMENTOS OBRIGATORIOS DO WORKFLOW ==="
-          echo "1. name: Nome do workflow"
-          echo "2. on: Eventos que disparam o workflow"
-          echo "3. jobs: Conjunto de tarefas a serem executadas"
-
-      - name: Variaveis e contextos
-        run: |
-          echo "=== VARIAVEIS E CONTEXTOS ==="
-          echo "Variavel en: ${{ env.NODE_VERSION }}"
-          echo "Respositorio: ${{ github.repository }}"
-          echo " Branch: ${{ github.ref_name }}"
-          echo "Actor: ${{ github.actor }}"
+         echo "RELATRIO DIARIO AUTOMATICO"
+         echo "==============================="
+         echo "Total de commits: $(git rev-list --all --count)"
+         echo "Contribuidores unicos: $(git shortlog -s -n | wc -l)"
+         echo "Ultimo commit: $(git log -1 --pretty=format:'%h - %an, %ar : %s')"
