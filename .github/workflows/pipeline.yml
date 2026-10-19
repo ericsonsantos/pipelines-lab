@@ -1,11 +1,11 @@
 on:
   schedule:
     # Exucuta as 21:51 hora de Brasília (UTC)
-    - cron: '55 21 * * *' # Runs every day at midnight
+    - cron: '55 00 * * *' 
   workflow_dispatch:
 
 jobs:
-  echeduled-job:
+  scheduled-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Informalçoes da Schedule
         run: |
-          echo "workflow disprado por schedele
+          echo "workflow dispaeado por schedule"
           echo "Data e hora: $(date)"
           echo "hora utc: $(date -u)"
           echo "timezone: $(date +%Z)"
